@@ -7,14 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author admin
- * @since 2024-05-07
- */
+
 public interface MenuMapper extends BaseMapper<Menu> {
 
     @Select({"select title,href,icon from menu,menu_authority where menu.id = menu_authority.mid and menu_authority.uid = #{id} "})

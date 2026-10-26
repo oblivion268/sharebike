@@ -9,14 +9,7 @@ import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author admin
- * @since 2024-05-07
- */
+
 @Data
   @EqualsAndHashCode(callSuper = false)
     public class Violation implements Serializable {

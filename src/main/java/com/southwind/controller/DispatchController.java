@@ -22,14 +22,7 @@ import org.springframework.stereotype.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author admin
- * @since 2024-05-07
- */
+
 @RestController
 @RequestMapping("/dispatch")
 public class DispatchController {

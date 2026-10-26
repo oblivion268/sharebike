@@ -7,8 +7,16 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+//返回结果类
 public class ResultObj {
 
+    private Integer code;
+    private String msg;
+    private Integer type;
+    private User user;
+    private Admin admin;
+
+    //登录校验
     public static final ResultObj LOGIN_SUCCESS = new ResultObj(0, "登录成功");
     public static final ResultObj LOGIN_ERROR_LOGINNAME = new ResultObj(-1, "用户名或类型错误");
     public static final ResultObj LOGIN_ERROR_PASSWORD = new ResultObj(-1, "密码错误");
@@ -45,9 +53,5 @@ public class ResultObj {
         this.msg = msg;
     }
 
-    private Integer code;
-    private String msg;
-    private Integer type;
-    private User user;
-    private Admin admin;
+
 }

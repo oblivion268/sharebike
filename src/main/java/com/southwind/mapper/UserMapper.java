@@ -7,14 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author admin
- * @since 2024-05-07
- */
+
 public interface UserMapper extends BaseMapper<User> {
 
     @Select({"select username from user where id = #{id} "})

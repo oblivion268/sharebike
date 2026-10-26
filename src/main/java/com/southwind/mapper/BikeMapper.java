@@ -7,14 +7,6 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author admin
- * @since 2024-05-07
- */
 public interface BikeMapper extends BaseMapper<Bike> {
 
     @Select({"select sum(time) value ,number name from operate,bike where operate.bid = bike.id group by bid"})

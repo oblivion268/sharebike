@@ -37,7 +37,9 @@ public class Main {
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setInclude(
-                "record");
+                "record",
+                "admin",
+                "appeal");
         autoGenerator.setStrategy(strategyConfig);
         autoGenerator.execute();
     }

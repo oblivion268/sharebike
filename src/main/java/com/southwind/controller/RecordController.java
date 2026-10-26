@@ -15,14 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author admin
- * @since 2024-05-16
- */
+
 @RestController
 @RequestMapping("/record")
 public class RecordController {

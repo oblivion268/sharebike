@@ -21,8 +21,13 @@ public class RedirectController {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * 生成验证码
+     *
+     * @return 验证码字符串
+     */
     @GetMapping("/getCode")
-    public String getCode(){
+    public String getCode() {
         SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 4);
         String code = specCaptcha.text().toLowerCase();
         Cache.map.put("code", code);
@@ -30,18 +35,25 @@ public class RedirectController {
     }
 
     @GetMapping("/login")
-    public ResultObj login(AccountForm accountForm){
-        //验证用户名
-        if(accountForm.getType() == 4){
+    public ResultObj login(AccountForm accountForm) {
+        //验证用户名  查询用户 否则 查询admin
+        if (accountForm.getType() == 4) {
             //查询user
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("username", accountForm.getLoginname());
             User user = this.userService.getOne(queryWrapper);
-            if(user == null) return ResultObj.LOGIN_ERROR_LOGINNAME;
+            if (user == null) {
+                return ResultObj.LOGIN_ERROR_LOGINNAME;
+            }
             //验证密码
-            if(!user.getPassword().equals(accountForm.getPassword())) return ResultObj.LOGIN_ERROR_PASSWORD;
+            if (!user.getPassword().equals(accountForm.getPassword())) {
+                return ResultObj.LOGIN_ERROR_PASSWORD;
+            }
             //验证code
-            if(!Cache.map.get("code").toString().equals(accountForm.getCode())) return ResultObj.LOGIN_ERROR_CODE;
+            if (!Cache.map.get("code").toString().equals(accountForm.getCode())) {
+                return ResultObj.LOGIN_ERROR_CODE;
+            }
+            //存取左侧列表
             Cache.map.put("type", accountForm.getType());
             Cache.map.put("user", user);
             ResultObj loginSuccess = ResultObj.LOGIN_SUCCESS;
@@ -51,14 +63,17 @@ public class RedirectController {
         } else {
             //查询admin
             QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("username", accountForm.getLoginname())
-                        .eq("type", accountForm.getType());
+            queryWrapper.eq("username", accountForm.getLoginname()).eq("type", accountForm.getType());
             Admin admin = this.adminService.getOne(queryWrapper);
-            if(admin == null) return ResultObj.LOGIN_ERROR_LOGINNAME;
+            if (admin == null) return ResultObj.LOGIN_ERROR_LOGINNAME;
             //验证密码
-            if(!admin.getPassword().equals(accountForm.getPassword())) return ResultObj.LOGIN_ERROR_PASSWORD;
+            if (!admin.getPassword().equals(accountForm.getPassword())) {
+                return ResultObj.LOGIN_ERROR_PASSWORD;
+            }
             //验证code
-            if(!Cache.map.get("code").toString().equals(accountForm.getCode())) return ResultObj.LOGIN_ERROR_CODE;
+            if (!Cache.map.get("code").toString().equals(accountForm.getCode())) {
+                return ResultObj.LOGIN_ERROR_CODE;
+            }
             Cache.map.put("type", accountForm.getType());
             Cache.map.put("user", admin);
             ResultObj loginSuccess = ResultObj.LOGIN_SUCCESS;
